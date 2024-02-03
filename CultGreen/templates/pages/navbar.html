@@ -1,0 +1,23 @@
+{% load static %}
+
+<header class="text-gray-600 body-font">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0" href="{{HTTP_HOST}}/">
+      <img class="logo w-10 h-10" src="{% static 'images/CultGreen.png' %}" viewBox="0 0 24 24" />
+      <span class="ml-3 text-2xl text-green-900 font-['Lora'] font-semibold hover:border-b border-green-900">Cult Green</span>
+    </a>
+    <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <a class="mr-10 font-medium hover:font-semibold hover:text-green-800 hover:border-b border-green-900" href="{{HTTP_HOST}}/home">Home</a>
+      <!-- <a class="mr-10 font-medium hover:font-semibold hover:text-green-800">Search</a> -->
+      <a class="mr-10 font-medium hover:font-semibold hover:text-green-800 hover:border-b border-green-900" href="{{HTTP_HOST}}/myplants">My Plants</a>
+      <a class="mr-10 font-medium hover:font-semibold hover:text-green-800 hover:border-b border-green-900" href="{{HTTP_HOST}}/about">About</a>
+    </nav>
+    <a href="{{HTTP_HOST}}/login">
+    <button class="SignIn items-center w-30 h-10 px-9 py-3.5 text-white bg-green-700 rounded-lg justify-center items-center inline-flex font-medium hover:font-semibold focus:outline-green-800 hover:bg-white hover:text-green-800 rounded text-base mt-4 md:mt-0">
+      Sign In
+    </button>
+    </a>
+  </div>
+  <script src="{% static 'js/script.js' %}"></script>
+</header>
+

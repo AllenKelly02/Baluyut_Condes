@@ -1,0 +1,126 @@
+{% extends 'pages/index.html' %}
+{% load static %}
+
+{% block content %}
+<div pt-9 mt-9>  
+    <!-- search bar -->
+    <div class="flex pr-12 pt-12 justify-end">
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 w-64 sr-only dark:text-white">Search</label>
+      <form action="/search" method="get" class="relative flex">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+          </div>
+          <input type="search" id="default-search" name="q" class="w-96 p-3 pl-8 mr-8 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="Search for your plant's name.." required>
+          <button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Search</button>
+      </form>
+    </div>
+  
+    <!-- contents -->
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap -m-4">
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Aloe Vera" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/av.jpg' %}" />
+          </a>
+          
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Aloe Vera</h2>
+            <p class="mt-1">Aloe Barbadensis Miller</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/ama.jpg' %}" />          
+          </a>
+          <div class="mt-4">
+            <!-- <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">CATEGORY</h3> -->
+            <h2 class="text-gray-900 title-font text-lg font-medium">Amaryllis</h2>
+            <p class="mt-1">Hippeastrum 'Gervase'</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/anthurium.jpeg' %}" />          
+          </a>
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Anthurium</h2>
+            <p class="mt-1">Anthurium scherzerianum</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/bishop cactus.png' %}" />          
+          </a>
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Astrophytum myriostigma</h2>
+            <p class="mt-1">Bishop's Cap Cactus</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/bunny cactus.jpg' %}" />          
+          </a>
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Opuntia microdays</h2>
+            <p class="mt-1">Bunny Ear Cactus</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/chin cactus.jpg' %}" />          
+          </a>
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Gymnocalycium baldeanum</h2>
+            <p class="mt-1">Chin Cactus</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/coleus.jpg' %}" />          
+          </a>
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Coleus scutellarioides</h2>
+            <p class="mt-1">Coleus</p>
+          </div>
+        </div>
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+          <a class="block relative h-48 rounded overflow-hidden">
+            <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/ama.jpg' %}" />          
+          </a>
+          <div class="mt-4">
+            <h2 class="text-gray-900 title-font text-lg font-medium">Acanthocereus tetragonus</h2>
+            <p class="mt-1">Fairy Castle Cactus</p>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+
+    <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      <div class="group relative">
+        <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+          <img src="https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full">
+        </div>
+        <div class="mt-4 flex justify-between">
+          <div>
+            <h3 class="text-sm text-gray-700">
+              <a href="#">
+                <span aria-hidden="true" class="absolute inset-0"></span>
+                Basic Tee
+              </a>
+            </h3>
+            <p class="mt-1 text-sm text-gray-500">Black</p>
+          </div>
+          <p class="text-sm font-medium text-gray-900">$35</p>
+        </div>
+      </div>
+
+    More plants... 
+    </div>
+  </div>-->
+  </div>
+{% endblock content %}
+    

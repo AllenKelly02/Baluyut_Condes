@@ -1,0 +1,231 @@
+{% extends 'pages/index.html' %}
+{% load static %}
+
+{% block content %}
+<div pt-9 mt-9>  
+    <!-- search bar -->
+    <div class="flex pr-12 pt-12 justify-end">
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 w-64 sr-only">Search</label>
+      <form action="/search" method="get" class="relative flex">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+              </svg>
+          </div>
+          <input type="search" id="default-search" name="q" class="w-96 p-3 pl-8 mr-8 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-green-500 focus:border-green-500" placeholder="Search for your plant's name.." required>
+          <button type="submit" class="text-black mx-2 border border-green-800 bg-white hover:bg-green-800 hover:text-white focus:ring-4 focus:outline-green focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2">Search</button>
+      </form>
+      <!-- <a class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Add</a> -->
+     
+
+<!-- Modal toggle -->
+<button data-modal-target="crud-modal" data-modal-toggle="crud-modal" class="flex justify-center items-center text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2" type="button">
+  Add Plant
+</button>
+
+<!-- Main modal -->
+<div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex items-center justify-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow-2xl">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
+                <h3 class="text-lg font-semibold text-gray-900">
+                    Add new plant
+                </h3>
+                <button type="button" id="close-modal" class="text-gray-400 bg-transparent hover:bg-red-200 hover:text-red-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center" data-modal-toggle="crud-modal">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                  <span class="sr-only">Close</span>
+              </button>
+            </div>
+            <!-- Modal body -->
+            <form method="post" enctype="multipart/form-data" action="{% url 'add_plant' %}" class="p-4 md:p-5">
+              {% csrf_token %}
+                <div class="grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Name of your plant</label>
+                        <input type="text" name="plant_name" id="plant_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type your own plant's name" required="">
+                    </div>
+                    <!-- <div class="col-span-2 sm:col-span-1">
+                        <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
+                        <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                    </div> -->
+                    <div class="col-span-2">
+                        <label for="species" class="block mb-2 text-sm font-medium text-gray-900">Type of plant</label>
+                        <input type="text" name="species" id="species" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Type of the plant" required="">
+                    </div>
+                    <div class="col-span-2">
+                      <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                      <textarea rows="4" name="description" id="description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="Desciption of your plant" required=""></textarea>   
+                    </div>
+                    <div class="col-span-2">
+                      <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload plant photo</label>
+                      <input type="file" name="image" accept="image/*" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" required="">
+                  </div>
+                </div>
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    Done
+                </button>
+            </form>
+        </div>
+    </div>
+</div> 
+
+    </div>
+
+    <!-- contents -->
+<div class="container px-5 py-24 mx-auto">
+  <div class="flex flex-wrap -m-4">
+    {% for plant in plants %}
+    <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+      <a class="block relative h-48 rounded overflow-hidden">
+        <img alt="{{ plant.species }}" class="object-cover object-center w-full h-full block" src="{{ plant.image.url }}" />
+      </a>
+      <div class="mt-4">
+        <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">{{ plant.plant_name }}</h3>
+        <h2 class="text-gray-900 title-font text-lg font-medium">{{ plant.species }}</h2>
+        <p class="mt-1">{{ plant.desciption }}</p>
+        <a href="{% url 'edit_plant' plant.id %}" class="text-blue-500 hover:text-blue-700">Edit</a>
+
+        <a href="{% url 'delete_plant' plant.id %}" class="text-white inline-flex items-center bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center w-24 h-auto ml-52">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+          </svg>              
+          Delete
+        </a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+</div>
+{% comment %} <div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/ama.jpg' %}" />
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">SEOKMIN</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Amaryllis</h2>
+    <p class="mt-1">Hippeastrum 'Gervase'</p>
+  </div>
+</div>
+<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Amaryllis" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/ama.jpg' %}" />          
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">SEUNGKWAN</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Amaryllis</h2>
+    <p class="mt-1">Hippeastrum 'Gervase'</p>
+  </div>
+</div>
+<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Peace Lily" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/peace lily.png' %}" />          
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">JISOO</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Peace Lily</h2>
+    <p class="mt-1">Spathiphyllum hybridum</p>
+  </div>
+</div>
+<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Bishop's Cap Cactus" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/bishop cactus.png' %}" />
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">JEONGHAN</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Bishop's Cap Cactus</h2>
+    <p class="mt-1">Astrophytum myriostigma</p>
+  </div>
+</div>
+<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Bunny Ear Cactus" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/bunny cactus.jpg' %}" />
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">SEUNGCHEOL</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Bunny Ear Cactus</h2>
+    <p class="mt-1">Opuntia microdays</p>
+  </div>
+</div>
+<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Chin Cactus" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/chin cactus.jpg' %}" />
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">SOONYOUNG</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Chin Cactus</h2>
+    <p class="mt-1">Gymnocalycium baldeanum</p>
+  </div>
+</div>
+<div class="lg:w-1/4 md:w-1/2 p-4 w-full">
+  <a class="block relative h-48 rounded overflow-hidden">
+    <img alt="Coleus" class="object-cover object-center w-full h-full block" src="{% static 'images/plants/coleus.jpg' %}" />
+  </a>
+  <div class="mt-4">
+    <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1">JUNHUI</h3>
+    <h2 class="text-gray-900 title-font text-lg font-medium">Coleus</h2>
+    <p class="mt-1">Coleus scutellarioides</p>
+  </div>
+</div> {% endcomment %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Find all elements with data-modal-toggle attribute
+      var modalToggles = document.querySelectorAll('[data-modal-toggle]');
+
+      // Iterate over each modal toggle element
+      modalToggles.forEach(function (toggle) {
+          toggle.addEventListener('click', function () {
+              var targetId = this.getAttribute('crud-modal');
+              var targetModal = document.getElementById(targetId);
+
+              if (targetModal) {
+                  targetModal.classList.add('hidden');
+              }
+          });
+      });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Find all elements with data-modal-toggle attribute
+      var modalToggles = document.querySelectorAll('[data-modal-toggle]');
+
+      // Iterate over each modal toggle element
+      modalToggles.forEach(function (toggle) {
+          toggle.addEventListener('click', function () {
+              var targetId = this.getAttribute('data-modal-target');
+              var targetModal = document.getElementById(targetId);
+
+              if (targetModal) {
+                  targetModal.classList.toggle('hidden');
+              }
+          });
+      });
+  });
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      // Find the close button by its ID
+      var closeButton = document.getElementById('close-modal');
+
+      // Find the modal by its ID
+      var modal = document.getElementById('crud-modal');
+
+      // Add an event listener to the close button
+      closeButton.addEventListener('click', function () {
+          // Hide the modal by adding the 'hidden' class
+          modal.classList.add('hidden');
+      });
+  });
+</script>
+
+{% endblock content %}
